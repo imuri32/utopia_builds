@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'home/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Root URI
+  root "home#index"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # Products Routes
+  get "/products", to: "products#index"
+  get '/products/:id', to: "products#show", as: "product"
 end
