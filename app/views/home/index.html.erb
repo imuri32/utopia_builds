@@ -1,2 +1,9 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1>Utopia Builds</h1>
+<h2>Recently Added:</h2>
+<p>**New <%=@recent_product.product_type.name%>**</p>
+<p><%=@recent_product.name %></p>
+
+<h2>Recently Added CPU:</h2>
+<p><%=@recent_cpu.name%></p><span>$<%=@recent_cpu.price%></span>
+
+<h2><%= link_to "See All Products", products_path %></h2>
