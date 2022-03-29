@@ -1,3 +1,6 @@
 class Product < ApplicationRecord
-  belongs_to :producttypes
+  # Associations
+  belongs_to :product_types
+
+  # Validations
 end
