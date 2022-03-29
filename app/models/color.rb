@@ -1,5 +1,6 @@
 class Color < ApplicationRecord
   # Validations
+  validates :name, presence: true
 
   # Associations
   has_many :product_colors
