@@ -1,6 +1,8 @@
 class Product < ApplicationRecord
   # Validations
   validates :name, presence: true
+  validates :price, numericality: true
+  validates :rating, numericality: true, allow_nil: true
 
   # Associations
   belongs_to :product_type
