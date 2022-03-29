@@ -2,3 +2,5 @@
 <% @products.each do | product | %>
   <p><%= link_to "#{product.name}", product %></p>
 <% end %>
+
+<%= paginate @products, theme: 'bootstrap-5' %>

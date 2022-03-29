@@ -84,6 +84,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
+    bootstrap5-kaminari-views (0.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.4)
     capybara (3.36.0)
       addressable
@@ -274,11 +277,13 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   bootsnap
+  bootstrap5-kaminari-views
   capybara
   debug
   devise
   importmap-rails
   jbuilder
+  kaminari
   puma (~> 5.0)
   rails (~> 7.0.2, >= 7.0.2.3)
   selenium-webdriver

@@ -6,6 +6,9 @@ ruby "2.7.1"
 gem 'activeadmin'
 gem 'devise'
 
+gem 'kaminari'
+gem 'bootstrap5-kaminari-views'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 
