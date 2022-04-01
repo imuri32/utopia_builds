@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   # Validations
   validates :name, presence: true
-  validates :price, numericality: true
+  validates :price, numericality: true, allow_nil: true
   validates :rating, numericality: true, allow_nil: true
 
   # Associations
