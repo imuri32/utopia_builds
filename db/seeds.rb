@@ -8,6 +8,10 @@
 
 require 'json'
 
+AdminUser.delete_all
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
 ProductColor.destroy_all
 Color.destroy_all
 Product.destroy_all
@@ -37,12 +41,7 @@ cases.each do |c|
       new_case.rating = c["rating"]
       new_case.brand = product_brand
 
-      puts "Adding #{c["name"]}"
-
       if c["color"]
-
-        puts "Adding Colors for #{c["name"]}"
-
         if c["color"].include? "/"
           colors = c["color"].split(" / ")
 
