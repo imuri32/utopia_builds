@@ -1,4 +1,10 @@
 <h1><%=@product.name%></h1>
+
+<% if @product.image.present? %>
+  <%= image_tag(@product.image, width:"100", class: "card-img-top")  %>
+<% end %>
+
+<p><%=@product.product_type.name %></p>
 <p>Price: <%=number_to_currency(@product.price)%></p>
 <p>Rating: <%=@product.rating%></p>
 
@@ -12,3 +18,6 @@
 <% else %>
   <p>N/A</p>
 <% end %>
+
+<p>Description:</p>
+<p><%= @product.description %></p>
