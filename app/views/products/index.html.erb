@@ -1,14 +1,23 @@
-<h1>Utopia Builds</h1>
-<h2>Recently Added:</h2>
-<p>**New <%=@recent_product.product_type.name%>**</p>
-<p><%=@recent_product.name %></p>
+<div class="container">
+  <h1>Utopia Builds</h1>
+  <div class="row mb-3">
+    <div class="col">
+      <h2>Recently Added:</h2>
+      <p>**New <%=@recent_product.product_type.name%>**</p>
+      <p><%=@recent_product.name %></p>
+    </div>
+    <div class="col">
+      <h2>Recently Added CPU:</h2>
+      <p><%=@recent_cpu.name%></p><span>$<%=@recent_cpu.price%></span>
+    </div>
+  </div>
 
-<h2>Recently Added CPU:</h2>
-<p><%=@recent_cpu.name%></p><span>$<%=@recent_cpu.price%></span>
+  <h1>All Products</h1>
 
-<h1>All Products</h1>
-<% @products.each do | product | %>
-  <p><%= link_to "#{product.name}", product %></p>
-<% end %>
+  <div class="row mb-3">
+    <%= render partial: "product_preview", collection: @products, as: :product %>
+  </div>
 
-<%= paginate @products, theme: 'bootstrap-5' %>
+
+  <%= paginate @products, theme: 'bootstrap-5' %>
+</div>
