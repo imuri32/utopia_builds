@@ -24,20 +24,26 @@
   <% end %>
 </div>
 
-<% if !params[:search].blank? %>
+<% if !params[:search].blank? && !params[:brand].blank? %>
+  <div class="row">
+    <p>Search results for: <b>"<%= params[:search] %>"</b> in <b><%=@brand.name%></b></p>
+  </div>
+<% elsif !params[:search].blank? %>
   <div class="row">
     <p>Search results for: <b>"<%= params[:search] %>"</b></p>
   </div>
+<% elsif params[:search].blank? && !params[:brand].blank? %>
+  <div class="row">
+    <p><b>All <%= @brand.name %> Products</b></p>
+  </div>
 <% end %>
 
-<%# Resetting dropdown to default %>
-<% if params[:brand] != "" %>
-  <% params[:brand] = "" %>
+<% if @products.empty?%>
+  <p>No products found.</p>
+<% else %>
+  <div class="row mb-3">
+    <%= render partial: "product_preview", collection: @products, as: :product %>
+  </div>
 <% end %>
-
-<div class="row mb-3">
-  <%= render partial: "product_preview", collection: @products, as: :product %>
-</div>
-
 
 <%= paginate @products, theme: 'bootstrap-5' %>
