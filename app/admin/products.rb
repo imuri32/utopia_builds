@@ -5,7 +5,7 @@ ActiveAdmin.register Product do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :name, :price, :rating, :product_type_id, :brand_id
+  permit_params :name, :price, :rating, :product_type_id, :brand_id, :image
   #
   # or
   #
@@ -14,5 +14,13 @@ ActiveAdmin.register Product do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
+
+  form do |f|
+    f.semantic_errors
+    f.inputs
+    f.actions         # adds the 'Submit' and 'Cancel' buttons
+    f.inputs do
+      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image, width:"200") : ""
+    end
+  end
 end
