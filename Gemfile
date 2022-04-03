@@ -9,6 +9,8 @@ gem 'devise'
 gem 'kaminari'
 gem 'bootstrap5-kaminari-views'
 
+gem 'aws-sdk-s3'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 
