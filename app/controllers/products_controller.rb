@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
 
     @products = Product.search(params[:search], params[:brand]).page params[:page]
 
-    @brands = Brand.all
+    @brands = Brand.all.order(:name)
 
     if params[:brand]
       @brand = Brand.find_by(id: params[:brand])
