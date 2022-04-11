@@ -12,4 +12,5 @@ Rails.application.routes.draw do
 
   # Home Routes
   get '/contact', to: "home#contact"
+  get '/about', to: "home#about"
 end
