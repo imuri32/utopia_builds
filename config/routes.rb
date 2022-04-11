@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   # Products Routes
   # get "/products", to: "products#index"
   get '/products/:id', to: "products#show", as: "product"
+
+  # Home Routes
+  get '/contact', to: "home#contact"
 end
