@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  devise_scope :user do
+    # Redirests signing out users back to sign-in
+    get "users", to: "devise/sessions#new"
+    get "/users/edit" => "devise/registrations#edit"
+  end
+
+  devise_for :users
+
   get 'brands/index'
   get 'brands/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
