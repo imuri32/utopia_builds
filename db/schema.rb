@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_12_165749) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_12_172251) do
   create_table "abouts", force: :cascade do |t|
     t.text "description"
     t.datetime "created_at", null: false
@@ -116,6 +116,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_12_165749) do
     t.text "description"
     t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["product_type_id"], name: "index_products_on_product_type_id"
+  end
+
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
