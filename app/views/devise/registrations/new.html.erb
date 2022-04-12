@@ -26,6 +26,11 @@
      <%= f.text_field :address, autofocus: true %>
   </div>
 
+  <div class="field">
+     <%= f.label :province_id %><br />
+     <%= f.select :province_id, options_from_collection_for_select(Province.all, :id, :name), prompt: "Select a Province" %>
+  </div><br />
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
