@@ -8,6 +8,10 @@
 
 require 'json'
 
+AdminUser.delete_all
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
 ProductColor.destroy_all
 Color.destroy_all
 Product.destroy_all
@@ -37,22 +41,24 @@ cases.each do |c|
       new_case.rating = c["rating"]
       new_case.brand = product_brand
 
-      if c["color"].include? "/"
-        colors = c["color"].split(" / ")
+      if c["color"]
+        if c["color"].include? "/"
+          colors = c["color"].split(" / ")
 
-        colors.each do |color|
-          new_color = Color.find_or_create_by(name: color)
+          colors.each do |color|
+            new_color = Color.find_or_create_by(name: color)
 
-          if new_color && new_color.valid?
-            ProductColor.find_or_create_by(product: new_case, color: new_color)
+            if new_color && new_color.valid?
+              ProductColor.find_or_create_by(product: new_case, color: new_color)
+            end
           end
+        else
+          new_color = Color.find_or_create_by(name: c["color"])
+          ProductColor.find_or_create_by(product: new_case, color: new_color)
         end
-      else
-        new_color = Color.find_or_create_by(name: c["color"])
-        ProductColor.find_or_create_by(product: new_case, color: new_color)
-      end
 
-      puts "Invalid case #{c["name"]}" unless new_case.valid?
+        puts "Invalid case #{c["name"]}" unless new_case.valid?
+      end
     end
   else
     puts "Invalid product type #{c["name"]}."
@@ -345,5 +351,3 @@ puts "Created #{ProductType.count} Product Types"
 puts "Created #{Product.count} Products"
 puts "Created #{Brand.count} Brands"
 puts "Created #{Color.count} Colors"
-
-

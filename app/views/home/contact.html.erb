@@ -1,0 +1,8 @@
+<h1>Contact Us</h1>
+
+<% @contacts.each do |contact| %>
+  <% if !contact.title.blank? %>
+    <strong><%=contact.title%></strong>
+  <% end %>
+  <p><%=contact.description%></p>
+<% end %>
