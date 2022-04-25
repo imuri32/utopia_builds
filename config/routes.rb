@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  # Cart Routes
+  resources :cart, only: [:create, :destroy]
+
   get 'brands/index'
   get 'brands/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
