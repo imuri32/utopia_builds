@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   # Associations
   belongs_to :province
+
+
 end
