@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_25_211829) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_26_163014) do
   create_table "abouts", force: :cascade do |t|
     t.text "description"
     t.datetime "created_at", null: false
@@ -106,6 +106,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_25_211829) do
     t.decimal "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "product_colors", force: :cascade do |t|
@@ -140,6 +142,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_25_211829) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "pst"
+    t.decimal "gst"
+    t.decimal "hst"
   end
 
   create_table "users", force: :cascade do |t|
@@ -161,6 +166,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_25_211829) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "users"
   add_foreign_key "product_colors", "colors"
   add_foreign_key "product_colors", "products"
   add_foreign_key "products", "brands"

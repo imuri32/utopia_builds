@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'checkout/index'
   devise_scope :user do
     # Redirests signing out users back to sign-in
     get "users", to: "devise/sessions#new"
