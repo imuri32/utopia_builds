@@ -29,9 +29,9 @@ class CheckoutController < ApplicationController
       pst = subtotal * province.pst
       gst = subtotal * province.gst
 
-      session[:order]["pst"] = pst
-      session[:order]["gst"] = gst
-      session[:order]["total"] = @subtotal + pst + gst
+      session[:order]["pst"] = pst.round(2)
+      session[:order]["gst"] = gst.round(2)
+      session[:order]["total"] = (@subtotal + pst + gst).round(2)
     end
   end
 

@@ -24,23 +24,28 @@
           <li class="nav-item pt-2">
             <%= link_to "About Us", about_path, class: "nav-link" %>
           </li>
-          <% if user_signed_in? %>
-            <li class="nav-item pt-2">
-              <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item pt-2">
-              <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
-            </li>
-          <% else %>
-            <li class="nav-item pt-2">
-              <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item pt-2">
-              <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
-            </li>
-          <% end %>
         </ul>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+          <div class="navbar-nav d-flex align-items-center mr-4">
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "My Orders", edit_user_registration_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+              </li>
+            <% end %>
+          </div>
           <div class="navbar-nav">
             <%= link_to checkout_path, style: "text-decoration: none;" do %>
               <span class="navbar-brand">Cart</span>
@@ -51,7 +56,6 @@
       </div>
     </nav>
     <div class="container" style="padding-top: 125px;">
-      <%= debug session[:shopping_cart] %>
       <% if notice %>
         <p class="alert alert-success"><%= notice %></p>
       <% end %>

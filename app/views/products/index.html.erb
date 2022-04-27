@@ -1,15 +1,3 @@
-<div class="row mb-3">
-  <div class="col">
-    <h2>Recently Added:</h2>
-    <p>**New <%=@recent_product.product_type.name%>**</p>
-    <p><%=@recent_product.name %></p>
-  </div>
-  <div class="col">
-    <h2>Recently Added CPU:</h2>
-    <p><%=@recent_cpu.name%></p><span>$<%=@recent_cpu.price%></span>
-  </div>
-</div>
-
 <div class="row">
   <div class="col">
     <%= form_with(url: root_path, method: :get) do %>
