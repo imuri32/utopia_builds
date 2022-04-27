@@ -3,35 +3,35 @@ class CheckoutController < ApplicationController
   def index
     if !user_signed_in?
       redirect_to new_user_session_path
-    end
+    else
+      if !session[:shopping_cart].empty?
+        # Setting up products to utilize its info in cart, subtotal info, and user province
+        items ||= []
+        subtotal = 0
 
-    if !session[:shopping_cart].empty?
-      # Setting up products to utilize its info in cart, subtotal info, and user province
-      items ||= []
-      subtotal = 0
+        session[:shopping_cart].each do |i|
+          product = Product.find(i["id"])
 
-      session[:shopping_cart].each do |i|
-        product = Product.find(i["id"])
+          subtotal += product.price * i["qty"].to_i
 
-        subtotal += product.price * i["qty"].to_i
+          items << product
+        end
 
-        items << product
+        @items = items
+
+        # Calculating sales tax
+        province = Province.find(current_user.province_id)
+
+        session[:order] = {}
+
+        pst = subtotal * province.pst
+        gst = subtotal * province.gst
+
+        session[:order]["pst"] = pst.round(2)
+        session[:order]["gst"] = gst.round(2)
+        session[:order]["subtotal"] = subtotal.round(2)
+        session[:order]["total"] = (subtotal + pst + gst).round(2)
       end
-
-      @items = items
-      @subtotal = subtotal
-
-      # Calculating sales tax
-      province = Province.find(current_user.province_id)
-
-      session[:order] = {}
-
-      pst = subtotal * province.pst
-      gst = subtotal * province.gst
-
-      session[:order]["pst"] = pst.round(2)
-      session[:order]["gst"] = gst.round(2)
-      session[:order]["total"] = (@subtotal + pst + gst).round(2)
     end
   end
 
@@ -60,6 +60,7 @@ class CheckoutController < ApplicationController
     order = Order.create(user_id: current_user.id)
     order.pst = session[:order]["pst"]
     order.gst = session[:order]["gst"]
+    order.subtotal = session[:order]["subtotal"]
     order.total = session[:order]["total"]
     order.save
 

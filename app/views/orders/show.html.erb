@@ -1,0 +1,27 @@
+<%= render_breadcrumbs separator: ' / ' %>
+
+<div class="row mt-2">
+  <h1>Order on <%= @order.created_at.strftime("%B %d, %Y")%></h1>
+</div>
+
+<div class="p-2 border border-secondary">
+  <h4>Items:</h4>
+  <%= render partial: "order_item", collection: @order.products, as: :order_item %>
+  <hr>
+  <div class="row">
+    <h5 class="col-sm-7">Subtotal:</h5>
+    <div class="col-sm-5"><%= number_to_currency(@order.subtotal) %></div>
+  </div>
+  <div class="row">
+    <h5 class="col-sm-7">GST/HST:</h5>
+    <div class="col-sm-5"><%= number_to_currency(@order.gst) %></div>
+  </div>
+  <div class="row">
+    <h5 class="col-sm-7">PST:</h5>
+    <div class="col-sm-5"><%= number_to_currency(@order.pst) %></div>
+  </div>
+  <div class="row">
+    <h5 class="col-sm-7">Grand Total:</h5>
+    <div class="col-sm-5"><%= number_to_currency(@order.total) %></div>
+  </div>
+</div>

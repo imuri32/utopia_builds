@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # User Routes
   devise_scope :user do
     # Redirests signing out users back to sign-in
     get "users", to: "devise/sessions#new"
@@ -15,9 +16,13 @@ Rails.application.routes.draw do
   post 'checkout/update'
   post 'checkout/confirm'
 
+  # Orders Routes
+  get 'orders', to: "orders#index"
+  get 'orders/:id', to: "orders#show", as: "order"
+
   # Brands Routes
-  get 'brands/index'
-  get 'brands/show'
+  get 'brands', to: "brands#index"
+  get 'brands/:id', to: "brands#show", as: "brand"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -26,7 +31,6 @@ Rails.application.routes.draw do
   root "products#index"
 
   # Products Routes
-  # get "/products", to: "products#index"
   get '/products/:id', to: "products#show", as: "product"
 
   # Home Routes

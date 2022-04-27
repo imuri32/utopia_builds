@@ -17,6 +17,11 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+
+    add_breadcrumb "Home".html_safe, root_path
+    add_breadcrumb "Brands".html_safe, brands_path
+    add_breadcrumb "#{@product.brand.name}".html_safe, brand_path(@product.brand.id)
+    add_breadcrumb "#{@product.name}".html_safe, product_path(params[:id])
   end
 
   private

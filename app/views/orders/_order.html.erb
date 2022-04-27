@@ -1,0 +1,18 @@
+<div class="row p-2 mb-1 border border-secondary">
+  <div class="col">
+    <%= link_to order.created_at.strftime("%B %d, %Y"), order_path(order) %>
+  </div>
+  <% if order.pst > 0 %>
+    <div class="col">
+      <%= "PST: #{number_to_currency(order.pst)}" %>
+    </div>
+  <% end %>
+  <% if order.gst > 0 %>
+    <div class="col">
+      <%= "GST/HST: #{number_to_currency(order.gst)}" %>
+    </div>
+  <% end %>
+  <div class="col">
+    <%= "Total: #{number_to_currency(order.total)}" %>
+  </div>
+</div>

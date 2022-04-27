@@ -19,6 +19,9 @@
             <%= link_to "Utopia Builds", root_path, class: "navbar-brand", style: "font-size: 30px;" %>
           </li>
           <li class="nav-item pt-2">
+            <%= link_to "Brands", brands_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item pt-2">
             <%= link_to "Contact", contact_path, class: "nav-link" %>
           </li>
           <li class="nav-item pt-2">
@@ -28,22 +31,22 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav d-flex align-items-center mr-4">
             <% if user_signed_in? %>
-              <li class="nav-item">
+              <div class="nav-item">
                 <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link" %>
-              </li>
-              <li class="nav-item">
-                <%= link_to "My Orders", edit_user_registration_path, class: "nav-link" %>
-              </li>
-              <li class="nav-item">
+              </div>
+              <div class="nav-item">
+                <%= link_to "My Orders", orders_path, class: "nav-link" %>
+              </div>
+              <div class="nav-item">
                 <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
-              </li>
+              </div>
             <% else %>
-              <li class="nav-item">
+              <div class="nav-item">
                 <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
-              </li>
-              <li class="nav-item">
+              </div>
+              <div class="nav-item">
                 <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
-              </li>
+              </div>
             <% end %>
           </div>
           <div class="navbar-nav">

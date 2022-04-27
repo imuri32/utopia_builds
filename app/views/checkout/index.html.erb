@@ -12,7 +12,7 @@
       <div class="row mb-3">
         <div class="col-md-7">Items:</div>
         <div class="col-md-5">
-          <%= number_to_currency(@subtotal) %>
+          <%= number_to_currency(session[:order]["subtotal"]) %>
         </div>
       </div>
 

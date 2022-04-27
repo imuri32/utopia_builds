@@ -1,2 +1,12 @@
-<h1>Brands</h1>
+<%= render_breadcrumbs separator: ' / ' %>
+
+<div class="row mt-2">
+  <h1>All Brands</h1>
+</div>
+
+<ul>
+  <%= render partial: "brands", collection: @brands, as: :brand %>
+</ul>
+
+<%= paginate @brands, theme: 'bootstrap-5' %>
 

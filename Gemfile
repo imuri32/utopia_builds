@@ -11,6 +11,8 @@ gem 'bootstrap5-kaminari-views'
 
 gem 'aws-sdk-s3'
 
+gem "breadcrumbs_on_rails"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.2", ">= 7.0.2.3"
 
