@@ -11,7 +11,22 @@ class Product < ApplicationRecord
   has_many :product_colors
   has_many :colors, through: :product_colors
 
+  has_many :order_items
+  has_many :orders, through: :order_items
+
   has_one_attached :image
+
+  def image_icon
+    image.variant(resize_to_limit: [100,100]).processed
+  end
+
+  def image_thumbnail
+    image.variant(resize_to_limit: [285,285]).processed
+  end
+
+  def image_full
+    image.variant(resize_to_limit: [500,500]).processed
+  end
 
   private
   def self.search(search, brand)

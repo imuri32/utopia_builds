@@ -1,7 +1,9 @@
-<h1><%=@product.name%></h1>
+<%= render_breadcrumbs separator: ' / ' %>
+
+<h1 class="mb-5 mt-2"><%=@product.name%></h1>
 
 <% if @product.image.present? %>
-  <%= image_tag(@product.image, width:"100", class: "card-img-top")  %>
+  <%= image_tag @product.image_full, class: "mb-5" %>
 <% end %>
 
 <p><%=@product.product_type.name %></p>

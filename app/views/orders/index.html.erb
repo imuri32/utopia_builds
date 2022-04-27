@@ -1,0 +1,12 @@
+<%= render_breadcrumbs separator: ' / ' %>
+
+<div class="row mt-2">
+  <h1>My Orders</h1>
+</div>
+
+<% if @orders.empty? %>
+  <p>No orders found.</p>
+<% else %>
+  <%= render partial: "order", collection: @orders, as: :order %>
+<% end %>
+

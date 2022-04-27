@@ -1,0 +1,8 @@
+<div class="row p-0 mb-2">
+  <div class="col-sm-7"><%= order_item.name %></div>
+
+  <% qty = @items.select {|item| item.product_id == order_item.id}.first %>
+  <div class="col-sm-2"><%= number_to_currency(order_item.price * qty["quantity"]) %></div>
+
+  <div class="col-sm-2">Quantity: <%= qty["quantity"] %></div>
+</div>

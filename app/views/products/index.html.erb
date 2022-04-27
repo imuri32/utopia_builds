@@ -1,25 +1,15 @@
-<div class="row mb-3">
-  <div class="col">
-    <h2>Recently Added:</h2>
-    <p>**New <%=@recent_product.product_type.name%>**</p>
-    <p><%=@recent_product.name %></p>
-  </div>
-  <div class="col">
-    <h2>Recently Added CPU:</h2>
-    <p><%=@recent_cpu.name%></p><span>$<%=@recent_cpu.price%></span>
-  </div>
-</div>
-
 <div class="row">
-  <%= form_with(url: root_path, method: :get) do %>
-    <div class="input-group mb-3">
-      <div class="input-group-text">
-        <%= text_field_tag(:search, params[:search], placeholder: 'Search for Products') %>
+  <div class="col">
+    <%= form_with(url: root_path, method: :get) do %>
+      <div class="input-group mb-3">
+        <div class="input-group-text">
+          <%= text_field_tag(:search, params[:search], placeholder: 'Search for Products') %>
+        </div>
+        <%= select_tag(:brand, options_from_collection_for_select(@brands, 'id', 'name'), prompt: "Search by Brand") %>
+        <%= submit_tag("Search", class: "btn btn-outline-secondary") %>
       </div>
-      <%= select_tag(:brand, options_from_collection_for_select(@brands, 'id', 'name'), prompt: "Search by Brand") %>
-      <%= submit_tag("Search", class: "btn btn-outline-secondary") %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
 
 <% if !params[:search].blank? && !params[:brand].blank? %>

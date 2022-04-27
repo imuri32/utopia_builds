@@ -1,2 +1,11 @@
-<h1>Brands#show</h1>
-<p>Find me in app/views/brands/show.html.erb</p>
+<%= render_breadcrumbs separator: ' / ' %>
+
+<h1 class="mb-4 mt-2"><%= @brand.name %></h1>
+
+<% if @brand_products.empty? %>
+  <p>No products found.</p>
+<% else %>
+  <div class="row mb-3">
+    <%= render partial: "brand_products", collection: @brand_products, as: :product %>
+  </div>
+<% end %>
