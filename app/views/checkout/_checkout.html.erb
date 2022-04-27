@@ -21,9 +21,6 @@
           <%= hidden_field_tag(:id, item.id) %>
           <%= button_tag 'Update', class: "btn btn-dark mt-2 mb-1", style: "width: 100px;" %>
         </div>
-        <%= link_to checkout_delete_path, class: "ml-4", style: "text-decoration: none;", method: :post do %>
-          ❌
-        <% end %>
       </div>
   <% end %>
 </div>

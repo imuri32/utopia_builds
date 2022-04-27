@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   get 'checkout', to: "checkout#index"
   post 'checkout/update'
   post 'checkout/confirm'
-  post 'checkout/delete'
 
   # Brands Routes
   get 'brands/index'

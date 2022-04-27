@@ -19,21 +19,21 @@
       <div class="row mb-3">
         <div class="col-md-7">GST/HST:</div>
         <div class="col-md-5">
-          <%= number_to_currency(@gst) %>
+          <%= number_to_currency(session[:order]["gst"]) %>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-md-7">PST:</div>
         <div class="col-md-5">
-          <%= number_to_currency(@pst) %>
+          <%= number_to_currency(session[:order]["pst"]) %>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-md-7">Total:</div>
         <div class="col-md-5">
-          <%= number_to_currency(@total) %>
+          <%= number_to_currency(session[:order]["total"]) %>
         </div>
       </div>
 

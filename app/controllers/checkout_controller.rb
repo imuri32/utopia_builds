@@ -23,10 +23,15 @@ class CheckoutController < ApplicationController
 
       # Calculating sales tax
       province = Province.find(current_user.province_id)
-      @pst = subtotal * province.pst
-      @gst = subtotal * province.gst
 
-      @total = @subtotal + @pst + @gst
+      session[:order] = {}
+
+      pst = subtotal * province.pst
+      gst = subtotal * province.gst
+
+      session[:order]["pst"] = pst
+      session[:order]["gst"] = gst
+      session[:order]["total"] = @subtotal + pst + gst
     end
   end
 
@@ -50,21 +55,23 @@ class CheckoutController < ApplicationController
     redirect_to checkout_path
   end
 
-  # POST /checkout/remove, checkout_remove
-  def remove
-    logger.debug("***Trying to delete #{params[:id]} from cart.")
-    id = params[:id].to_i
-    session[:shopping_cart].delete_if { |c| c["id"] == id }
-
-    product = Product.find(id)
-    flash[:alert] = "#{product.name} removed from cart."
-    redirect_to root_path
-  end
-
   # POST /checkout/confirm, checkout_confirm
   def confirm
     order = Order.create(user_id: current_user.id)
+    order.pst = session[:order]["pst"]
+    order.gst = session[:order]["gst"]
+    order.total = session[:order]["total"]
+    order.save
+
+    session[:shopping_cart].each do |i|
+      product = Product.find(i["id"].to_i)
+
+      OrderItem.create(order_id: order.id, product_id: product.id, quantity: i["qty"].to_i)
+    end
+
+    session[:shopping_cart] = []
     flash[:notice] = "Your order has been placed!"
+
     redirect_to root_path
   end
 end
