@@ -6,11 +6,13 @@ class CartController < ApplicationController
     id = params[:id].to_i
     qty = params[:qty].to_i
 
-    unless session[:shopping_cart].include? (id)
+    # Adds to cart if cart is empty or not empty and selected item from cart does not exist yet
+    if session[:shopping_cart].select {|c| c["id"] == id}.first.nil?
       if(qty > 0)
-        session[:shopping_cart] << id # Push id onto end of cart array
-        session[:cart_qty] << {id: id, qty: qty}
+        # Grabbing product to obtain base item price and name
         product = Product.find(params[:id])
+
+        session[:shopping_cart] << {id: id, qty: qty, price: (product.price * qty.to_i)}
         flash[:notice] = "#{qty} #{product.name}(s) added to cart."
       else
         product = Product.find(params[:id])
@@ -18,9 +20,12 @@ class CartController < ApplicationController
       end
     else
       if(qty > 0)
-        found = session[:cart_qty].select {|c| c["id"] == id}.first
-        found["qty"] = qty
+        # Grabbing product to obtain base item price and name
         product = Product.find(params[:id])
+        found = session[:shopping_cart].select {|c| c["id"] == id}.first
+        found["qty"] = qty
+        found["price"] = (product.price * qty.to_i)
+
         flash[:notice] = "Updated #{product.name} to #{found["qty"].to_i} item(s) in cart."
       else
         product = Product.find(params[:id])
@@ -36,17 +41,10 @@ class CartController < ApplicationController
   def destroy
     logger.debug("***Trying to delete #{params[:id]} from cart.")
     id = params[:id].to_i
-    session[:shopping_cart].delete(id)
-    session[:cart_qty].delete_if { |c| c["id"] == id }
+    session[:shopping_cart].delete_if { |c| c["id"] == id }
 
     product = Product.find(id)
     flash[:alert] = "#{product.name} removed from cart."
-    redirect_to root_path
-  end
-
-  def update
-    id = params[:id].to_i
-    flash[:notice] = "There are #{params[:qty]} item(s)."
     redirect_to root_path
   end
 end

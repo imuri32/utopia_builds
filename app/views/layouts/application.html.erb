@@ -42,15 +42,16 @@
         </ul>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <span class="navbar-brand">Cart</span>
-            <span class="navbar-brand border-0 rounded" style="min-width: 40px; text-align: center; background-color: black; color: white;"><%= session[:shopping_cart].size %></span>
+            <%= link_to checkout_path, style: "text-decoration: none;" do %>
+              <span class="navbar-brand">Cart</span>
+              <span class="navbar-brand border-0 rounded" style="min-width: 40px; text-align: center; background-color: black; color: white;"><%= session[:shopping_cart].size %></span>
+            <% end %>
           </div>
         </div>
       </div>
     </nav>
     <div class="container" style="padding-top: 125px;">
       <%= debug session[:shopping_cart] %>
-      <%= debug session[:cart_qty] %>
       <% if notice %>
         <p class="alert alert-success"><%= notice %></p>
       <% end %>

@@ -1,0 +1,29 @@
+<div class="row p-2 mb-2 border border-secondary">
+  <div class="col-sm-2 d-flex align-items-center">
+    <%= image_tag item.image_icon %>
+  </div>
+  <div class="col-sm-3 ml-1 justify-content-center">
+    <div class="row">
+      <h4><%= item.name %></h4>
+    </div>
+    <div class="row">
+      <%= number_to_currency(item.price) %>
+    </div>
+  </div>
+  <%= form_with url: checkout_update_path, class: "col-sm-4 offset-sm-1 d-flex align-middle", method: :post do %>
+      <div class="col d-flex align-items-center">Qty:</div>
+      <div class="col-sm-4 p-0 d-flex align-items-center">
+        <% qty = session[:shopping_cart].select {|c| c["id"] == item.id}.first %>
+        <%= number_field_tag 'qty', qty["qty"], style: "width: 100px;" %>
+      </div>
+      <div class="col-sm-11 ml-5 d-flex align-items-center">
+        <div class="row">
+          <%= hidden_field_tag(:id, item.id) %>
+          <%= button_tag 'Update', class: "btn btn-dark mt-2 mb-1", style: "width: 100px;" %>
+        </div>
+        <%= link_to checkout_delete_path, class: "ml-4", style: "text-decoration: none;", method: :post do %>
+          ❌
+        <% end %>
+      </div>
+  <% end %>
+</div>

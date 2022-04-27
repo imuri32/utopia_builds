@@ -2,18 +2,23 @@
   <div class="card mb-2" style="width: 18rem;">
     <div class="card-body">
       <% if product.image.present? %>
-        <%= image_tag product.image, class: "card-img-top mb-2" %>
+        <%= image_tag product.image_thumbnail, class: "card-img-top mb-2" %>
       <% end %>
+
       <h5 class="card-title"><%= link_to product.name, product %></h5>
       <h6 class="card-subtitle mb-2 text-muted"><%=product.product_type.name %></h6>
-      <% if cart.include?(product) %>
+
+      <% if session[:shopping_cart].select {|c| c["id"] == product.id}.first != nil %>
         <%= form_with url: cart_index_path, method: :post do %>
           <label class="col-sm-5 col-form-label" style="padding-left: 0px;">Quantity:</label>
-          <%= number_field_tag 'qty', nil, class: "col-sm-5" %>
+
+          <% qty = session[:shopping_cart].select {|c| c["id"] == product.id}.first %>
+          <%= number_field_tag 'qty', qty["qty"], class: "col-sm-5" %>
 
           <%= hidden_field_tag(:id, product.id) %>
           <%= button_tag 'Update Cart', class: "btn btn-dark mt-2 mb-1" %>
         <% end %>
+
         <%= button_to cart_path(product), method: :delete, class: "btn btn-secondary" do %>
           Remove from Cart
         <% end %>

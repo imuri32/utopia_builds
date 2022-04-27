@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'checkout/index'
   devise_scope :user do
     # Redirests signing out users back to sign-in
     get "users", to: "devise/sessions#new"
@@ -11,10 +10,19 @@ Rails.application.routes.draw do
   # Cart Routes
   resources :cart, only: [:create, :destroy]
 
+  # Checkout Routes
+  get 'checkout', to: "checkout#index"
+  post 'checkout/update'
+  post 'checkout/confirm'
+  post 'checkout/delete'
+
+  # Brands Routes
   get 'brands/index'
   get 'brands/show'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
   # Root URI
   root "products#index"
 
