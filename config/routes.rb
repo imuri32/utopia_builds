@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Root URI
+  root to: "products#index"
+
   # User Routes
   devise_scope :user do
     # Redirests signing out users back to sign-in
@@ -26,9 +29,6 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-
-  # Root URI
-  root to: "products#index"
 
   # Products Routes
   get '/products/:id', to: "products#show", as: "product"
