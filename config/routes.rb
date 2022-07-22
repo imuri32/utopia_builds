@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   # Root URI
-  root "products#index"
+  root to: "products#index"
 
   # Products Routes
   get '/products/:id', to: "products#show", as: "product"
